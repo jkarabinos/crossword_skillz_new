@@ -14,14 +14,6 @@ public class NetworkingLogic : MonoBehaviour {
     [SerializeField]
     GameOver gameOver;
 
-    [SerializeField]
-    Text myUsernameText;
-
-    [SerializeField]
-    Text enemyUsernameText;
-
-    [SerializeField]
-    ShowPlayers showPlayers;
 
     CreateBoard createBoard;
     GameplayLogic gameplayLogic;

@@ -76,8 +76,7 @@ public class GameOver : MonoBehaviour {
     [SerializeField]
     float timeBetweenGems = .25f;
 
-    [SerializeField]
-    GemRow[] gemRows;
+ 
 
     [SerializeField]
     int smallGemReward = 20;
@@ -154,15 +153,10 @@ public class GameOver : MonoBehaviour {
 
         StartCoroutine(EndGameCoroutine());
 
-        AddRewardGems();
+      
 
 
-        //add the clues solved to the total clues solved for the user and store the new best word if there is one
-        PlayerPrefs.SetInt(StatManager.CLUES_SOLVED, PlayerPrefs.GetInt(StatManager.CLUES_SOLVED) + gameplayLogic.numClues);
-
-        int oldBestWord = PlayerPrefs.GetInt(StatManager.BEST_WORD);
-        if (gameplayLogic.bestWordScore > oldBestWord)
-            PlayerPrefs.SetInt(StatManager.BEST_WORD, gameplayLogic.bestWordScore);
+        
     }
 
     IEnumerator EndGameCoroutine()
@@ -234,63 +228,6 @@ public class GameOver : MonoBehaviour {
     }
 
 
-
-
-    void AddRewardGems()
-    {
-        int numGems = gameCompleteReward;
-
-        if (int.Parse(bestWordScoreText.text) > int.Parse(bestWordScoreTextEnemy.text))
-            numGems += smallGemReward;
-        else if (int.Parse(bestWordScoreText.text) == int.Parse(bestWordScoreTextEnemy.text))
-            numGems += smallGemReward / 2;
-
-        if (int.Parse(numCluesText.text) > int.Parse(numCluesTextEnemy.text))
-            numGems += smallGemReward;
-        else if (int.Parse(numCluesText.text) == int.Parse(numCluesTextEnemy.text))
-            numGems += smallGemReward / 2;
-
-        if (int.Parse(friendlyScoreText.text) > int.Parse(enemyScoreText.text))
-            numGems += winReward;
-        else if (int.Parse(friendlyScoreText.text) == int.Parse(enemyScoreText.text))
-            numGems += winReward / 2;
-
-        GemManager.AddGems(numGems);
-        Debug.Log("adding gems: " + numGems);
-        
-    }
-
-    IEnumerator AnimateGem(int index)
-    {
-        yield return new WaitForSeconds(timeBetweenGems);
-
-        if(index < gemRows.Length)
-        {
-
-            gameAudio.PlayOneShot(gameAudio.gemSound, .8f);
-
-            GemRow gemRow = gemRows[index];
-
-            if(index == 0)
-            {
-                gemRow.Setup(int.Parse(bestWordScoreText.text), int.Parse(bestWordScoreTextEnemy.text), smallGemReward, 0);
-            }else if(index == 1)
-            {
-                gemRow.Setup(int.Parse(numCluesText.text), int.Parse(numCluesTextEnemy.text), smallGemReward, 0);
-            }else if(index == 2)
-            {
-                gemRow.Setup(int.Parse(friendlyScoreText.text), int.Parse(enemyScoreText.text), winReward * 2, gameCompleteReward);
-            }
-           
-            StartCoroutine(AnimateGem(index + 1));
-        }
-        else
-        {
-            //StartCoroutine(AnimateRowExit());
-            lastIndex = -1;
-            SetNextButtonActive(true);
-        }
-    }
 
     [SerializeField]
     Color notInteractableColor;

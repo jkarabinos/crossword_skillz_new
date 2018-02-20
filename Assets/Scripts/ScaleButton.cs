@@ -21,8 +21,6 @@ public class ScaleButton : MonoBehaviour {
     [SerializeField]
     float maxScale = 1.3f;
 
-    [SerializeField]
-    AnimateMenu animateMenu;
 
     float startTime;
    
