@@ -11,6 +11,7 @@ public class FillTiles : MonoBehaviour {
     [SerializeField]
     private float waitTime = 5.0f;
 
+    TileLogic[] tileFillOrder;
 
     float currentWaitTime;
     float lastLetterInputTime;
@@ -28,9 +29,31 @@ public class FillTiles : MonoBehaviour {
 	void Update () {
 		if(Time.time - lastLetterInputTime > currentWaitTime)
         {
-            FillRandomTile();
+            //FillRandomTile();
+            FillRandomTileNew();
         }
 	}
+
+    public void SetTileOrder(TileLogic[] tiles)
+    {
+        tileFillOrder = new TileLogic[tiles.Length];
+
+        // copy the tile array to the new tile order
+        for(int i = 0; i < tiles.Length; i++)
+        {
+            tileFillOrder[i] = tiles[i];
+        }
+
+        //shuffle the order to create a random fill order
+        for(int i = 0; i < tiles.Length; i++)
+        {
+            int randomSwapIndex = Random.Range(0, tiles.Length);
+            TileLogic tempTile = tileFillOrder[i];
+
+            tileFillOrder[i] = tileFillOrder[randomSwapIndex];
+            tileFillOrder[randomSwapIndex] = tempTile;
+        }
+    }
 
     public void ResetWaitTime()
     {
@@ -75,5 +98,24 @@ public class FillTiles : MonoBehaviour {
             gameLogic.SetRandomTile(emptyTiles[ind], ind);
         }
 
+    }
+
+    void FillRandomTileNew()
+    {
+        ResetWaitTime();
+        string[] userGrid = gameLogic.GetUserGrid();
+
+        for(int i = 0; i < tileFillOrder.Length; i++)
+        {
+            TileLogic tl = tileFillOrder[i];
+            if (tl == null)
+                continue;
+
+            if(tl.tileLetter != userGrid[tl.index])
+            {
+                gameLogic.SetRandomTile(tl.tileLetter, tl.index);
+                break;
+            }
+        }
     }
 }

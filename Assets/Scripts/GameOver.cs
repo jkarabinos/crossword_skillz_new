@@ -297,6 +297,6 @@ public class GameOver : MonoBehaviour {
 
     public void NextButton()
     {
-        SceneManager.LoadScene("HomeScene");
+        GameManager.instance.LeaveGame();
     }
 }

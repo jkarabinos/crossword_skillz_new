@@ -567,6 +567,8 @@ public class GameplayLogic : MonoBehaviour {
     public void SetTileArray(TileLogic[] _tiles)
     {
         tiles = _tiles;
+        GetComponent<FillTiles>().SetTileOrder(_tiles);
+
         ResetTileColors();
         userGrid = BlankGrid(tiles.Length);
 

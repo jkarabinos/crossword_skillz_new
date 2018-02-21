@@ -74,7 +74,11 @@ public class GameManager : MonoBehaviour {
         GetComponent<GameplayLogic>().SetTileArray(tiles);
     }
 
-    
+    public void LeaveGame()
+    {
+        //end the game and submit the score to skillz
+        SceneManager.LoadScene("HomeScene");
+    }
 
 
    

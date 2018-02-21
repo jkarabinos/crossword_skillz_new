@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 047bc1de4e0fe1d4ab71401283918bd7
+timeCreated: 1519170490
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Ninja Garden Laser
+  fontNames:
+  - Ninja Garden Laser
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
