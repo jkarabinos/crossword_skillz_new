@@ -67,7 +67,8 @@ public class ScaleButton : MonoBehaviour {
 
     void Scale(float scale)
     {
-        buttonText.fontSize = (int) (scale * originalTextSize);
+        //buttonText.fontSize = (int) (scale * originalTextSize);
+        buttonText.transform.localScale = new Vector2(scale, scale);
         GetComponent<RectTransform>().sizeDelta = scale * originalSizeDelta;
     }
 }

@@ -420,11 +420,11 @@ MonoBehaviour:
   tileButton: {fileID: 114481450174107006}
   scoreMultText: {fileID: 1676785058913370}
   borderImage: {fileID: 1762304023962822}
-  highlightedColor: {r: 0.20392157, g: 0.28627452, b: 0.36862746, a: 1}
-  normalLetterColor: {r: 0.12156863, g: 0.23921569, b: 0.47843137, a: 1}
-  doubleLetterColor: {r: 0.078431375, g: 0.16078432, b: 0.32156864, a: 1}
-  tripleLetterColor: {r: 0.078431375, g: 0.16078432, b: 0.32156864, a: 1}
-  quadLetterColor: {r: 0.078431375, g: 0.16078432, b: 0.32156864, a: 1}
+  highlightedColor: {r: 0.42352945, g: 0.3921569, b: 0.10980393, a: 1}
+  normalLetterColor: {r: 0.24313727, g: 0.24313727, b: 0.039215688, a: 1}
+  doubleLetterColor: {r: 0.13333334, g: 0.14901961, b: 0.058823533, a: 1}
+  tripleLetterColor: {r: 0.13333334, g: 0.14901961, b: 0.058823533, a: 1}
+  quadLetterColor: {r: 0.13333334, g: 0.14901961, b: 0.058823533, a: 1}
   tileLetterText: {fileID: 114068130958496644}
   clueNumberText: {fileID: 114912606315759682}
   interactionButton: {fileID: 114481450174107006}
@@ -611,7 +611,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1961906239068396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21, y: 30, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224392980847204232}
@@ -647,7 +647,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1676785058913370}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.00012207031, y: 0.000061035156, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.0000055, y: 1.0000055, z: 1.0000055}
   m_Children: []
   m_Father: {fileID: 224392980847204232}
