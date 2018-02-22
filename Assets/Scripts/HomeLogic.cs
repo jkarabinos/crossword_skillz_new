@@ -12,6 +12,7 @@ public class HomeLogic : MonoBehaviour {
 
         if (isUsingSkillz)
         {
+            
             SkillzCrossPlatform.LaunchSkillz();
         }
         else
