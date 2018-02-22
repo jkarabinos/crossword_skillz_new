@@ -77,7 +77,18 @@ public class GameManager : MonoBehaviour {
     public void LeaveGame()
     {
         //end the game and submit the score to skillz
-        SceneManager.LoadScene("HomeScene");
+        if (HomeLogic.isUsingSkillz)
+        {
+            if (SkillzCrossPlatform.IsMatchInProgress())
+            {
+                SkillzCrossPlatform.ReportFinalScore(GetComponent<GameplayLogic>().UpdateScore());
+            }
+        }
+        else
+        {
+            SceneManager.LoadScene("HomeScene");
+        }
+
     }
 
 

@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class GameplayLogic : MonoBehaviour {
 
     [SerializeField]
+    int scoreMultiplier = 10;
+
+    [SerializeField]
     GameAudio gameAudio;
 
     [SerializeField]
@@ -780,7 +783,7 @@ public class GameplayLogic : MonoBehaviour {
     public int numClues = 0;
     public int numCluesEnemy;
 
-    void UpdateScore()
+    public int UpdateScore()
     {
         int s1 = 0;
         int s2 = 0;
@@ -788,10 +791,10 @@ public class GameplayLogic : MonoBehaviour {
         for(int i =0; i < tiles.Length; i++)
         {
             if (localPlayerGrid[i] != "")
-                s1 += tiles[i].scoreMult;
+                s1 += tiles[i].scoreMult * scoreMultiplier;
 
             if (enemyPlayerGrid[i] != "")
-                s2 += tiles[i].scoreMult;
+                s2 += tiles[i].scoreMult * scoreMultiplier;
         }
 
         int scoreDelta = s1 - oldScore;
@@ -822,6 +825,15 @@ public class GameplayLogic : MonoBehaviour {
         //enemyScoreText.text = "YOU: " + s2;
         oldScore = s1;
         oldEnemyScore = s2;
+
+
+        if (HomeLogic.isUsingSkillz)
+        {
+            if (SkillzCrossPlatform.IsMatchInProgress())
+                SkillzCrossPlatform.UpdatePlayersCurrentScore(s1);
+        }
+
+        return s1;
     }
 
     

@@ -5,12 +5,20 @@ using UnityEngine.SceneManagement;
 
 public class HomeLogic : MonoBehaviour {
 
-	
+    public static bool isUsingSkillz = true;
 
     public void PlayGame()
     {
 
-        SceneManager.LoadScene("GameScene");
+        if (isUsingSkillz)
+        {
+            SkillzCrossPlatform.LaunchSkillz();
+        }
+        else
+        {
+            SceneManager.LoadScene("GameScene");
+        }
+
 
     }
 
