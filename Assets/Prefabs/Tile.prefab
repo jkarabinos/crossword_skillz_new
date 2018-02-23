@@ -422,9 +422,9 @@ MonoBehaviour:
   borderImage: {fileID: 1762304023962822}
   highlightedColor: {r: 1, g: 1, b: 1, a: 1}
   normalLetterColor: {r: 1, g: 1, b: 1, a: 1}
-  doubleLetterColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
-  tripleLetterColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
-  quadLetterColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
+  doubleLetterColor: {r: 0.7647059, g: 0.7647059, b: 0.7647059, a: 1}
+  tripleLetterColor: {r: 0.76470596, g: 0.76470596, b: 0.76470596, a: 1}
+  quadLetterColor: {r: 0.76470596, g: 0.76470596, b: 0.76470596, a: 1}
   tileLetterText: {fileID: 114068130958496644}
   clueNumberText: {fileID: 114912606315759682}
   interactionButton: {fileID: 114481450174107006}
