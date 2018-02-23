@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.47058824, g: 0.47058824, b: 0.47058824, a: 1}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -391,7 +391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9450981, g: 0.76470596, b: 0.20784315, a: 1}
+  m_Color: {r: 0.94509804, g: 0.76862746, b: 0.05882353, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -422,9 +422,9 @@ MonoBehaviour:
   borderImage: {fileID: 1762304023962822}
   highlightedColor: {r: 1, g: 1, b: 1, a: 1}
   normalLetterColor: {r: 1, g: 1, b: 1, a: 1}
-  doubleLetterColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-  tripleLetterColor: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
-  quadLetterColor: {r: 0.7843138, g: 0.7843138, b: 0.7843138, a: 1}
+  doubleLetterColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
+  tripleLetterColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
+  quadLetterColor: {r: 0.7058824, g: 0.7058824, b: 0.7058824, a: 1}
   tileLetterText: {fileID: 114068130958496644}
   clueNumberText: {fileID: 114912606315759682}
   interactionButton: {fileID: 114481450174107006}
@@ -489,7 +489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.043137256, g: 0.058823533, b: 0.06666667, a: 1}
+  m_Color: {r: 0.11764706, g: 0.11764706, b: 0.11764706, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:

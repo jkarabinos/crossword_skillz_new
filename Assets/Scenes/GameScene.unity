@@ -8487,7 +8487,7 @@ MonoBehaviour:
   gameAudio: {fileID: 48737911}
   clueText: {fileID: 86496542}
   scoreLogic: {fileID: 459632767}
-  localInputTextColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
+  localInputTextColor: {r: 0.76862746, g: 0.8980392, b: 0.21960784, a: 1}
   scoreText: {fileID: 2112152958}
   enemyScoreText: {fileID: 0}
   highlightedColorBlock:
@@ -8504,9 +8504,9 @@ MonoBehaviour:
     m_DisabledColor: {r: 0.90196085, g: 0.90196085, b: 0.90196085, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
-  localColor: {r: 0.19215688, g: 0.227451, b: 0.14901961, a: 1}
+  localColor: {r: 0, g: 0.5803922, b: 0.19607843, a: 1}
   enemyColor: {r: 0.7529412, g: 0.22352941, b: 0.16862746, a: 1}
-  neutralColor: {r: 0.11764706, g: 0.11764706, b: 0.11764706, a: 1}
+  neutralColor: {r: 0, g: 0, b: 0, a: 1}
   waitToInteractTime: 0.75
   gameOver: {fileID: 1715976642}
   canInteract: 1
