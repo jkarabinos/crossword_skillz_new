@@ -4728,9 +4728,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9fbb75c8ed6e914d8eeecee5df20a2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialPath: Borders/Borders_Long/rank_border_long_
-  pathExtension: 
-  loadRank: {fileID: 0}
 --- !u!1 &818522520
 GameObject:
   m_ObjectHideFlags: 0
@@ -6634,10 +6631,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d5587b6e069f84eb0828c1b30cce34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRankPrefab: {fileID: 1621393359239224, guid: 75e5a3b09d68c5f4e85a93ecfb2bf7d4,
-    type: 2}
-  playerRankParent1: {fileID: 499547705}
-  playerRankParent2: {fileID: 1363140345}
 --- !u!1 &1206790812
 GameObject:
   m_ObjectHideFlags: 0
@@ -8494,7 +8487,7 @@ MonoBehaviour:
   gameAudio: {fileID: 48737911}
   clueText: {fileID: 86496542}
   scoreLogic: {fileID: 459632767}
-  localInputTextColor: {r: 0.58431375, g: 0.64705884, b: 0.6509804, a: 1}
+  localInputTextColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
   scoreText: {fileID: 2112152958}
   enemyScoreText: {fileID: 0}
   highlightedColorBlock:
@@ -8505,15 +8498,15 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   normalColorBlock:
-    m_NormalColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
-    m_HighlightedColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
-    m_PressedColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
-    m_DisabledColor: {r: 0.74509805, g: 0.74509805, b: 0.74509805, a: 1}
+    m_NormalColor: {r: 0.9019608, g: 0.9019608, b: 0.9019608, a: 1}
+    m_HighlightedColor: {r: 0.90196085, g: 0.90196085, b: 0.90196085, a: 1}
+    m_PressedColor: {r: 0.90196085, g: 0.90196085, b: 0.90196085, a: 1}
+    m_DisabledColor: {r: 0.90196085, g: 0.90196085, b: 0.90196085, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
-  localColor: {r: 0.15294118, g: 0.68235296, b: 0.3764706, a: 1}
+  localColor: {r: 0.19215688, g: 0.227451, b: 0.14901961, a: 1}
   enemyColor: {r: 0.7529412, g: 0.22352941, b: 0.16862746, a: 1}
-  neutralColor: {r: 1, g: 1, b: 1, a: 1}
+  neutralColor: {r: 0.11764706, g: 0.11764706, b: 0.11764706, a: 1}
   waitToInteractTime: 0.75
   gameOver: {fileID: 1715976642}
   canInteract: 1

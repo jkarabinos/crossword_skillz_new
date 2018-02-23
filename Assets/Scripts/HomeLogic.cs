@@ -9,6 +9,7 @@ public class HomeLogic : MonoBehaviour {
 
     public void PlayGame()
     {
+        //isUsingSkillz = false;
 
         if (isUsingSkillz)
         {

@@ -47,7 +47,12 @@ public class FillTiles : MonoBehaviour {
         //shuffle the order to create a random fill order
         for(int i = 0; i < tiles.Length; i++)
         {
-            int randomSwapIndex = Random.Range(0, tiles.Length);
+            int randomSwapIndex = 0;
+            if (HomeLogic.isUsingSkillz)
+                randomSwapIndex = SkillzCrossPlatform.Random.Range(0, tiles.Length);
+            else
+                randomSwapIndex = Random.Range(0, tiles.Length);
+
             TileLogic tempTile = tileFillOrder[i];
 
             tileFillOrder[i] = tileFillOrder[randomSwapIndex];
@@ -61,6 +66,7 @@ public class FillTiles : MonoBehaviour {
         currentWaitTime = waitTime;
     }
 
+    /*
     void FillRandomTile()
     {
         Debug.Log("fill random tile");
@@ -98,7 +104,7 @@ public class FillTiles : MonoBehaviour {
             gameLogic.SetRandomTile(emptyTiles[ind], ind);
         }
 
-    }
+    }*/
 
     void FillRandomTileNew()
     {

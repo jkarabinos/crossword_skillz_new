@@ -21,21 +21,35 @@ public class NetworkingLogic : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+        string fileName = "";
+
+        if (HomeLogic.isUsingSkillz)
+        {
+            int r1 = SkillzCrossPlatform.Random.Range(0, 5);
+            int r2 = SkillzCrossPlatform.Random.Range(0, 10);
+
+            fileName = "CrosswordData/Size_8_" + r1 + "/crosswords_" + r2;
+        }
+        else
+        {
+            fileName = "CrosswordData/Size_8_" + Random.Range(0, 5) + "/crosswords_" + UnityEngine.Random.Range(0, 10);
+        }
+
         
-            string fileName = "CrosswordData/Size_8_" + Random.Range(0, 5) + "/crosswords_" + UnityEngine.Random.Range(0, 10);
-        
 
 
-            TextAsset ta = (TextAsset)Resources.Load(fileName);
-            string[] crosswords = ta.text.Split('\n');
-            int randomIndex = Random.Range(0, crosswords.Length);
-            //int randomIndex = 0;
+        TextAsset ta = (TextAsset)Resources.Load(fileName);
+        string[] crosswords = ta.text.Split('\n');
+        int randomIndex = 0;
 
-
+        if (HomeLogic.isUsingSkillz)
+            randomIndex = SkillzCrossPlatform.Random.Range(0, crosswords.Length);
+        else
+            randomIndex = Random.Range(0, crosswords.Length);
            
-
-            int[] scoreMults = CreateScoreMults() ;
-           StartGame( fileName, scoreMults, randomIndex);
+        int[] scoreMults = CreateScoreMults() ;
+        StartGame( fileName, scoreMults, randomIndex);
       
         
 	}
@@ -75,7 +89,13 @@ public class NetworkingLogic : MonoBehaviour {
         int[] scoreMults = new int[maxGridSize * maxGridSize];
         for (int i = 0; i < scoreMults.Length; i++)
         {
-            int r = Random.Range(0, 100);
+            int r = 0;
+
+            if (HomeLogic.isUsingSkillz)
+                r = SkillzCrossPlatform.Random.Range(0, 100);
+            else
+                r = Random.Range(0, 100);
+
             int s = 1;
             if (r >= 99)
                 s = 4;

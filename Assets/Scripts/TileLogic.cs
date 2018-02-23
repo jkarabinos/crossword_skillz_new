@@ -78,7 +78,9 @@ public class TileLogic : MonoBehaviour {
     {
         tileButton.colors = cb;
         if (isHighlighted)
+            //SetColor(-1);
             SetColor(0);// SetColor(-1); for other highlight method
+
         else
             SetColor(scoreMult - 1);
 
