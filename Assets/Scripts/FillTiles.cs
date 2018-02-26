@@ -34,6 +34,11 @@ public class FillTiles : MonoBehaviour {
         }
 	}
 
+    public int GetWaitTime()
+    {
+        return (int)waitTime;
+    }
+
     public void SetTileOrder(TileLogic[] tiles)
     {
         tileFillOrder = new TileLogic[tiles.Length];

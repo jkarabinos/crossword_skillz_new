@@ -7,6 +7,9 @@ using UnityEngine.UI;
 public class GameplayLogic : MonoBehaviour {
 
     [SerializeField]
+    AutomaticSubmission autoSubmit;
+
+    [SerializeField]
     int scoreMultiplier = 10;
 
     [SerializeField]
@@ -400,8 +403,11 @@ public class GameplayLogic : MonoBehaviour {
 
     public void DidSelectTile(TileLogic tile)
     {
-        if(canInteract)
+        if (canInteract)
+        {
             DidSelectTileWithDirection(tile, true, false);
+            autoSubmit.ResetSubmissionTimer();
+        }
     }
 
     void DidSelectTileWithDirection(TileLogic tile, bool isAcross, bool selectNow)
@@ -572,8 +578,8 @@ public class GameplayLogic : MonoBehaviour {
         tiles = _tiles;
         GetComponent<FillTiles>().SetTileOrder(_tiles);
 
-        ResetTileColors();
         userGrid = BlankGrid(tiles.Length);
+        ResetTileColors();
 
         localPlayerGrid = BlankGrid(tiles.Length);
         enemyPlayerGrid = BlankGrid(tiles.Length);
@@ -732,6 +738,7 @@ public class GameplayLogic : MonoBehaviour {
     void HighlightTiles(TileLogic startingTile, bool isAcross)
     {
         //ResetTileColors();
+        //UpdateUserGrid();
 
         string answer = startingTile.acrossAnswer;
         int offset = 1;
@@ -746,8 +753,6 @@ public class GameplayLogic : MonoBehaviour {
         for(int i = 0; i < answer.Length; i++)
         {
             int index = startingTile.index + i * offset;
-            //TileLogic tl = tiles[index];
-            //tl.SetTileColor(highlightedColorBlock, true);
             highlightIndices.Add(index);
             
         }
@@ -758,9 +763,9 @@ public class GameplayLogic : MonoBehaviour {
             if (tl == null) continue;
 
             if (highlightIndices.Contains(j))
-                tl.SetTileColor(highlightedColorBlock, true);
+                tl.SetTileColor(highlightedColorBlock, true, userGrid[tl.index]);
             else
-                tl.SetTileColor(normalColorBlock, false);
+                tl.SetTileColor(normalColorBlock, false, userGrid[tl.index]);
         }
     }
 
@@ -769,7 +774,7 @@ public class GameplayLogic : MonoBehaviour {
         foreach(TileLogic tl in tiles)
         {
             if (tl != null)
-                tl.SetTileColor(normalColorBlock, false);
+                tl.SetTileColor(normalColorBlock, false, userGrid[tl.index]);
         }
     }
 

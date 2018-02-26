@@ -74,9 +74,23 @@ public class TileLogic : MonoBehaviour {
     }
 
 
-    public void SetTileColor(ColorBlock cb, bool isHighlighted)
+    public void SetTileColor(ColorBlock cb, bool isHighlighted, string currentLetter)
     {
-        tileButton.colors = cb;
+        /*if (currentLetter == tileLetter && !isHighlighted)
+        {
+            ColorBlock newCb = new ColorBlock();
+            newCb.normalColor = new Color(cb.normalColor.r, cb.normalColor.g, cb.normalColor.b, 1);
+            newCb.pressedColor = new Color(cb.normalColor.r, cb.normalColor.g, cb.normalColor.b, 1);
+            newCb.disabledColor = new Color(cb.normalColor.r, cb.normalColor.g, cb.normalColor.b, 1);
+            newCb.highlightedColor = new Color(cb.normalColor.r, cb.normalColor.g, cb.normalColor.b, 1);
+            newCb.colorMultiplier = cb.colorMultiplier;
+            newCb.fadeDuration = cb.fadeDuration;
+            tileButton.colors = newCb;
+
+        }
+        else*/
+            tileButton.colors = cb;   
+
         if (isHighlighted)
             //SetColor(-1);
             SetColor(0);// SetColor(-1); for other highlight method

@@ -19,14 +19,6 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     GameOver gameOver;
 
-    [SerializeField]
-    int numRanksForBonusStar = 5;
-
-    [SerializeField]
-    string difficultOppenentString = "DIFFICULT OPPONENT - BONUS STAR";
-
-    [SerializeField]
-    string winStreakString = "WIN STREAK - BONUS STAR";
 
     public static Color FRIENDLY_COLOR;
     public static Color ENEMY_COLOR;
@@ -77,20 +69,24 @@ public class GameManager : MonoBehaviour {
     public void LeaveGame()
     {
         //end the game and submit the score to skillz
+        LeaveGame(GetComponent<GameplayLogic>().UpdateScore());
+
+    }
+
+    public void LeaveGame(int finalScore)
+    {
         if (HomeLogic.isUsingSkillz)
         {
             if (SkillzCrossPlatform.IsMatchInProgress())
             {
-                SkillzCrossPlatform.ReportFinalScore(GetComponent<GameplayLogic>().UpdateScore());
+                SkillzCrossPlatform.ReportFinalScore(finalScore);
             }
         }
         else
         {
             SceneManager.LoadScene("HomeScene");
         }
-
     }
-
 
    
 }

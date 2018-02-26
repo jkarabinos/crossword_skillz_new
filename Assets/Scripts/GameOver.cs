@@ -6,7 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour {
 
+    [SerializeField]
+    AutomaticSubmission autoSubmit;
 
+    [SerializeField]
+    GameObject[] gameRecapLines;
 
     [SerializeField]
     GameAudio gameAudio;
@@ -23,27 +27,23 @@ public class GameOver : MonoBehaviour {
     [SerializeField]
     GameObject gameOverUI;
 
+
     [SerializeField]
     Text friendlyScoreText;
 
     [SerializeField]
-    Text enemyScoreText;
+    Text highScoreText;
+
+    [SerializeField]
+    Text timeBonusText;
 
     [SerializeField]
     Text bestWordScoreText;
 
     [SerializeField]
-    Text bestWordScoreTextEnemy;
-
-    [SerializeField]
     Text numCluesText;
 
-    [SerializeField]
-    Text numCluesTextEnemy;
-
-    [SerializeField]
-    Text didWinText;
-
+    
 
 
     [SerializeField]
@@ -52,70 +52,192 @@ public class GameOver : MonoBehaviour {
     [SerializeField]
     Transform endPos;
 
-    [SerializeField]
-    float shoutOutUpTime = 2.0f;
-
-    [SerializeField]
-    string winString = "VICTORY!";
-
-    [SerializeField]
-    string loseString = "DEFEAT!";
-
-    [SerializeField]
-    string drawString = "DRAW!";
-
-    [SerializeField]
-    float fadeDuration = .25f;
 
     [SerializeField]
     float waitTime = 1.0f;
 
     [SerializeField]
-    float rowAnimationTime = 1.0f;
+    float animationTime = .55f;
+
 
     [SerializeField]
-    float timeBetweenGems = .25f;
-
- 
+    GameObject gameBoard;
 
     [SerializeField]
-    int smallGemReward = 20;
+    GameObject keyboard;
 
     [SerializeField]
-    int gameCompleteReward = 50;
+    GameObject clueHolder;
 
     [SerializeField]
-    int winReward = 50;
+    GameObject scoreHolder;
+
+    [SerializeField]
+    GameObject pauseButton;
+
+    [SerializeField]
+    Transform newGameBoardPos;
+
+    [SerializeField]
+    Transform newKeyboardPos;
+
+    [SerializeField]
+    Transform newClueHolderPos;
+
+    [SerializeField]
+    Transform newScoreHolderPos;
+
+    [SerializeField]
+    Transform newPauseButtonPos;
+
+    [SerializeField]
+    float timeMult = .5f; 
+
 
     bool gameIsOver = false;
 
 
-    int winner = 0; // -1 for enemy win, 1 for local win, 0 for draw
-
     float startTime;
 
-    bool isFading = false;
+    bool isAnimating = false;
+    int animationIndex = 0;
 
-    float initialRowSize;
-    float maxRowSize;
+    float gameStartTime;
 
-    
+    Vector3 originalKeyboardPos;
+    Vector3 originalBoardPos;
+    Vector3 originalCluePanelPos;
+    Vector3 originalScorePos;
+    Vector3 originalPausePos;
+
+    Vector2[] originalRecapRowPositions;
 
     private void Awake()
     {
-        
+        gameStartTime = Time.time;
 
-        if(scoreRows.Length > 0)
+        originalRecapRowPositions = new Vector2[gameRecapLines.Length];
+        for(int i = 0; i < originalRecapRowPositions.Length; i++)
         {
-            initialRowSize = scoreRows[0].GetComponent<RectTransform>().rect.width;
-            maxRowSize =  gameOverUI.GetComponent<RectTransform>().rect.width * 2;
+            originalRecapRowPositions[i] = gameRecapLines[i].transform.position;
         }
+
+        
     }
 
     private void OnEnable()
     {
         //EndGame(6, 2); //for testing purposes
     }
+
+    void LerpObject(GameObject go, Vector3 originalPos, Vector3 newPos, bool changeIndex)
+    {
+        float t = (Time.time - startTime) / animationTime;
+        go.transform.position = Vector3.Lerp(originalPos, newPos, t);
+
+        if (t > 1)
+        {
+            go.transform.position = newPos;
+
+            if(changeIndex)
+            {
+                startTime = Time.time;
+                animationIndex++;
+
+            }
+        }          
+    }
+
+    int playedSoundForIndex = 0;
+
+    void MoveRecapRow(GameObject go, Vector2 originalPos)
+    {
+        
+
+        Vector2 centerPos = new Vector2(gameOverUI.transform.position.x, go.transform.position.y);
+        float t = (Time.time - startTime) / animationTime;
+
+        if(t > .3)
+        {
+            if(animationIndex != playedSoundForIndex)
+            {
+                gameAudio.PlayOneShot(gameAudio.whoosh1, 1.0f);
+                playedSoundForIndex = animationIndex;
+            }
+        }
+
+
+        go.transform.position = Vector2.Lerp(originalPos, centerPos, t);
+        if(t > 1)
+        {
+            go.transform.position = centerPos;
+            startTime = Time.time;
+            animationIndex++;
+        }
+    }
+
+    private void Update()
+    {
+        if (isAnimating)
+        {
+
+            switch (animationIndex) {
+
+                case 0:
+                    LerpObject(keyboard, originalKeyboardPos, newKeyboardPos.position, true);
+                    break;
+                case 1:
+                    LerpObject(scoreHolder, originalScorePos, newScoreHolderPos.position, false);
+                    LerpObject(pauseButton, originalPausePos, newPauseButtonPos.position, true);
+                    break;
+                case 2:
+                    
+                    LerpObject(gameBoard, originalBoardPos, newGameBoardPos.position, true);
+                    break;
+                case 3:
+                    LerpObject(clueHolder, originalCluePanelPos, newClueHolderPos.position, true);
+                    break;
+                case 4:
+                    gameOverUI.SetActive(true);
+                    //autoSubmit.SetSubmissionTimer();
+                    animationIndex++;
+                    break;
+                case 12:
+                    autoSubmit.SetSubmissionTimer();
+                    animationIndex++;
+                    break;
+                case 13:
+                    break;
+                default:
+                    int index = animationIndex - 5;
+                    MoveRecapRow(gameRecapLines[index], originalRecapRowPositions[index]);
+                    break;
+            }
+
+
+
+        }
+    }
+
+    IEnumerator EndGameCoroutine()
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        //gameOverUI.SetActive(true);
+
+        isAnimating = true;
+        startTime = Time.time;
+    }
+
+    int GetTimeBonus()
+    {
+        int maxTime = gameplayLogic.GetTiles().Length * gameplayLogic.GetComponent<FillTiles>().GetWaitTime();
+        int gameTime = (int)(Time.time - gameStartTime);
+        int bonusPoints = (maxTime - gameTime);
+        return (int)(bonusPoints * timeMult);
+    }
+
+    private int finalScore;
 
     public void EndGame(int _friendlyScore, int _enemyScore, bool _wasDisconnect)
     {
@@ -126,39 +248,46 @@ public class GameOver : MonoBehaviour {
 
         //SetNextButtonActive(false);
 
-        winner = 1;
-        
 
-         
+        originalBoardPos = gameBoard.transform.position;
+        originalKeyboardPos = keyboard.transform.position;
+        originalCluePanelPos = clueHolder.transform.position;
+        originalPausePos = pauseButton.transform.position;
+        originalScorePos = scoreHolder.transform.position;
 
 
-        foreach (GameObject row in scoreRows)
+        int timeBonus = Mathf.Max(0,  GetTimeBonus());
+        finalScore = _friendlyScore + timeBonus;
+
+        if (HomeLogic.isUsingSkillz)
         {
-            row.GetComponent<RectTransform>().sizeDelta = new Vector2(maxRowSize, row.GetComponent<RectTransform>().rect.height);
+            if (SkillzCrossPlatform.IsMatchInProgress())
+                SkillzCrossPlatform.UpdatePlayersCurrentScore(finalScore);
         }
 
-        friendlyScoreText.text = _friendlyScore.ToString();
-        enemyScoreText.text = _enemyScore.ToString();
+        int highscore = 0;
+        if (PlayerPrefs.HasKey("highscore"))
+            highscore = PlayerPrefs.GetInt("highscore");
 
+        if(finalScore >= highscore) // for a new highscore
+        {
+            highscore = finalScore;
+            PlayerPrefs.SetInt("highscore", highscore);
+            highScoreText.color = friendlyScoreText.color;
+        }
+
+        timeBonusText.text = timeBonus.ToString();
+        friendlyScoreText.text = finalScore.ToString();
         bestWordScoreText.text = gameplayLogic.bestWordScore.ToString();
-        bestWordScoreTextEnemy.text = gameplayLogic.bestWordScoreEnemy.ToString();
-
         numCluesText.text = gameplayLogic.numClues.ToString();
-        numCluesTextEnemy.text = gameplayLogic.numCluesEnemy.ToString();
-
-        SetDidWinText();
-
-        gameOverUI.GetComponent<CanvasGroup>().alpha = 0;
-
-
+        highScoreText.text = highscore.ToString();
+       
         StartCoroutine(EndGameCoroutine());
-
-      
-
 
         
     }
 
+    /*
     IEnumerator EndGameCoroutine()
     {
         yield return new WaitForSeconds(waitTime);
@@ -292,11 +421,11 @@ public class GameOver : MonoBehaviour {
         }
     }
 
-
+    */
    
 
     public void NextButton()
     {
-        GameManager.instance.LeaveGame();
+        GameManager.instance.LeaveGame(finalScore);
     }
 }
