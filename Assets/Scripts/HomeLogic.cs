@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class HomeLogic : MonoBehaviour {
+    [SerializeField]
+    string tripeakAppLink;
 
     public static bool isUsingSkillz = true;
 
@@ -22,6 +24,16 @@ public class HomeLogic : MonoBehaviour {
         }
 
 
+    }
+
+    public void LinkToTripeaks()
+    {
+        LinkToApp(tripeakAppLink);
+    }
+
+    void LinkToApp(string appURL)
+    {
+        Application.OpenURL(appURL);
     }
 
 }
